@@ -1,0 +1,17 @@
+$kind: http-request
+name: "http://localhost:3000/orders  "
+description: POST order
+url: http://localhost:3000/orders
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Ali\",\r
+
+    \  \"phone\": \"5551234\",\r
+
+    \  \"items\": [{ \"lessonId\": \"Mathematics_ID\", \"spaces\": 2 }]\r
+
+    }"
+order: 1000
