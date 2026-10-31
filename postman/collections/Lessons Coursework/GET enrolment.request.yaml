@@ -1,0 +1,5 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/enrolment/6ac262b3f0dc13394152bf1f
+method: GET
+order: 3000
