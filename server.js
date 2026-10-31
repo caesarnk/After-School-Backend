@@ -26,8 +26,13 @@ let db;
 
 //returns every lesson as JSON
 app.get("/lessons", async(req, res) => {
-    const lessons = await db.collection("lessons").find({}).toArray();
+    try {
+        const lessons = await db.collection("lessons").find({}).toArray();
     res.json(lessons);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Could not retrieve lessons"});
+    }
 }); 
 
 //takes the order data
