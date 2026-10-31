@@ -61,6 +61,37 @@ app.post("/orders", async(req,res) => {
     }
 });
 
+app.put("/lessons/:id", async(req, res) => {
+    try {
+        if (!ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({error:"Invalid lesson id"}); 
+        }
+        const id = new ObjectId(req.params.id);
+
+        const update = req.body;
+        if (!update || Object.keys(update).length ===0) {
+            return res.status(400).json({error: "No update data provided"});
+        }
+
+        delete update._id;
+
+        //changes only the fields sent
+        const result = await db.collection("lessons").updateOne(
+            {_id: id},
+            {$set: update}
+        );
+
+        if (result.matchedCount === 0) {
+            return res.status(404).json({error: "Lesson not found"});
+        }
+
+        res.json({message: "Lesson updated successfully"});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Could not update lesson"});
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 
 client.connect().then(() => {
