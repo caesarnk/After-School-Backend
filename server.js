@@ -97,6 +97,32 @@ app.put("/lessons/:id", async(req, res) => {
     }
 });
 
+app.get("/enrolment/:lessonid", async(req, res) => {
+    try {
+        const lessonId = req.params.lessonid;
+
+        const orders = await db.collection("order")
+        .find({"items.lessonId": lessonId})
+        .toArray();
+
+        let total = 0;
+        
+        for (const order of orders) {
+            for (const item of order.items) {
+                if (item.lessonId === lessonId) {
+                    total += item.spaces;  //adds the items spaces to the total space
+                }
+
+            }
+        }
+
+        res.json({lessonId, enrolment: total});        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Could not get enrolment"});
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 
 client.connect().then(() => {
