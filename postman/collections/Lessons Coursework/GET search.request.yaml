@@ -1,0 +1,7 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/search?q=mathematics
+method: GET
+queryParams:
+  q: mathematics
+order: 4000
