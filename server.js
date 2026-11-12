@@ -123,6 +123,35 @@ app.get("/enrolment/:lessonid", async(req, res) => {
     }
 });
 
+// GET /search?q=... - searches subject, location, price and spaces on the server
+app.get("/search", async (req, res) => {
+    try {
+        // read the search text, lowercase it and trim spaces
+        const q = (req.query.q || "").toLowerCase().trim();
+
+        // load all lessons from the database
+        const lessons = await db.collection("lessons").find({}).toArray();
+
+        // no search text: return every lesson
+        if (q === "") {
+            return res.json(lessons);
+        }
+
+        // keep a lesson if the text appears in any of the four fields
+        const results = lessons.filter(lesson =>
+            String(lesson.subject).toLowerCase().includes(q) ||
+            String(lesson.location).toLowerCase().includes(q) ||
+            String(lesson.price).includes(q) ||
+            String(lesson.spaces).includes(q)
+        );
+
+        res.json(results);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Could not search lessons" });
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 
 client.connect().then(() => {
