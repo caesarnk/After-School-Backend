@@ -1,0 +1,8 @@
+$kind: http-request
+name: https://m00991041-after-school.onrender.com/search?q=mathematics
+description: Search for a lessson
+url: https://m00991041-after-school.onrender.com/search?q=mathematics
+method: GET
+queryParams:
+  q: mathematics
+order: 8000

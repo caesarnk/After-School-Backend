@@ -1,0 +1,6 @@
+$kind: http-request
+name: https://m00991041-after-school.onrender.com/lessons
+description: "GET lessons "
+url: https://m00991041-after-school.onrender.com/lessons
+method: GET
+order: 5000

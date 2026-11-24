@@ -1,0 +1,17 @@
+$kind: http-request
+name: https://m00991041-after-school.onrender.com/orders
+description: Saves new order
+url: https://m00991041-after-school.onrender.com/orders
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Michayel\",\r
+
+    \  \"phone\": \"845936934\",\r
+
+    \  \"items\": [{ \"lessonId\": \"6ac262b3f0dc13394152bf1f\", \"spaces\": 2 }]\r
+
+    }"
+order: 7000

@@ -152,6 +152,36 @@ app.get("/search", async (req, res) => {
     }
 });
 
+app.get("/teachers", async (req, res) => {
+    try {
+        const teachers = await db.collection("teachers").find({}).toArray();
+        res.json(teachers);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Could not fetch teachers" });
+    }
+});
+
+app.get("/teachers/:id/lessons", async (req, res) => {
+    try {
+        if(!ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({error: "Invalid teacher id"});
+        }
+
+        //find the teacher by id and get their lessonIds
+        const teacher = await db.collection("teachers").findOne({_id: new ObjectId(req.params.id)});
+        if (!teacher) {
+            return res.status(404).json({error: "Teacher not found"});
+        }
+        const lessonObjectId = teacher.lessonIds.map(id => new ObjectId(id));
+        const lessons = await db.collection("lessons").find({_id: {$in: lessonObjectId}}).toArray();
+        res.json(lessons);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "Could not fetch lessons for teacher"});
+    }
+});   
+
 const PORT = process.env.PORT || 3000;
 
 client.connect().then(() => {

@@ -1,0 +1,9 @@
+$kind: http-request
+name: https://m00991041-after-school.onrender.com/lessons/6ac262b3f0dc13394152bf24
+description: Update lesson spaces
+url: https://m00991041-after-school.onrender.com/lessons/6ac262b3f0dc13394152bf24
+method: PUT
+body:
+  type: json
+  content: '{"spaces": 5}'
+order: 6000

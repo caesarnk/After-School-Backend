@@ -1,6 +1,6 @@
 $kind: http-request
 description: ""
-url: http://localhost:3000/search?q=mathematics
+url: https://m00991041-after-school.onrender.com/search?q=mathematics
 method: GET
 queryParams:
   q: mathematics

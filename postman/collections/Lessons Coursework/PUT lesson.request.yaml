@@ -1,6 +1,6 @@
 $kind: http-request
 description: ""
-url: http://localhost:3000/lessons/6ac262b3f0dc13394152bf1f
+url: https://m00991041-after-school.onrender.com/lessons/6ac262b3f0dc13394152bf24
 method: PUT
 body:
   type: json
